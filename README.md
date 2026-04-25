@@ -75,7 +75,7 @@ Open in browser: http://127.0.0.1:5000
 
 ## 📸 Preview
 
-_Add your UI screenshot here_
+<img width="720" height="405" alt="output" src="https://github.com/user-attachments/assets/20830c45-3303-4e6f-bab3-955dfb5fb601" />
 
 ---
 
