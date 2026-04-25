@@ -1,119 +1,169 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
 
-    background: linear-gradient(135deg, #0f172a, #020617);
+    background: #0b1220; /* cleaner, not gradient spam */
+    color: #e5e7eb;
+
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-
-    color: white;
 }
 
-/* GLASS EFFECT */
+/* CONTAINER */
 .chat-container {
     width: 100%;
-    max-width: 550px;
-    height: 90vh;
+    max-width: 580px;
+    height: 92vh;
 
-    backdrop-filter: blur(20px);
-    background: rgba(15, 23, 42, 0.6);
+    margin-left: 260px;
 
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
 
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(59,130,246,0.3);
+    background: #111827;
+    border-radius: 20px;
+
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* HEADER */
 .chat-header {
-    padding: 18px;
-    background: linear-gradient(90deg, #3b82f6, #06b6d4);
-    font-weight: bold;
-    font-size: 18px;
+    padding: 16px;
+    font-weight: 600;
     text-align: center;
+
+    background: #1f2937;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 /* CHAT AREA */
 .chat-box {
     flex: 1;
     padding: 18px;
-    overflow-y: auto;
+
+    overflow-y: auto;  /* THIS is key */
+    overflow-x: hidden;
 
     display: flex;
     flex-direction: column;
+
     gap: 12px;
+
+    max-height: 100%; /* prevent expansion */
 }
 
-/* MESSAGES */
+/* SCROLLBAR */
+.chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-box::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+}
+
+/* MESSAGE BASE */
 .message {
     padding: 12px 16px;
     border-radius: 16px;
-    max-width: 70%;
-    animation: fadeIn 0.3s ease;
+    max-width: 75%;
+
+    font-size: 14px;
+    line-height: 1.5;
 }
 
+/* USER */
 .user {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: #2563eb;
+    color: white;
+
     align-self: flex-end;
+    border-bottom-right-radius: 6px;
 }
 
+/* BOT */
 .bot {
-    background: rgba(255,255,255,0.08);
+    background: #1f2937;
+    color: #e5e7eb;
+
     align-self: flex-start;
+    border-bottom-left-radius: 6px;
 }
 
 /* INPUT AREA */
 .input-area {
+    padding: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
     display: flex;
-    padding: 14px;
-    gap: 10px;
+    gap: 8px;
 }
 
 input {
     flex: 1;
     padding: 12px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: none;
     outline: none;
 
-    background: rgba(255,255,255,0.08);
+    background: #1f2937;
     color: white;
 }
 
 button {
-    padding: 12px 18px;
-    border: none;
-    border-radius: 10px;
+    padding: 12px 16px;
+    border-radius: 12px;
 
-    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    background: #2563eb;
     color: white;
-    cursor: pointer;
-    transition: 0.2s;
+    border: none;
 }
 
 button:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(59,130,246,0.6);
 }
 
-/* ANIMATION */
+button:active {
+    transform: scale(0.95);
+}
+
+/* FADE ANIMATION */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px);}
-    to { opacity: 1; transform: translateY(0);}
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* TYPING DOTS */
+/* TYPING BUBBLE */
 .typing {
-    width: fit-content;
+    align-self: flex-start;
+    display: flex;
+    gap: 4px;
     padding: 10px 14px;
-    border-radius: 14px;
+    border-radius: 16px;
     background: rgba(255,255,255,0.08);
 }
 
+/* DOTS */
 .typing span {
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
     animation: blink 1.4s infinite;
 }
 
@@ -125,6 +175,160 @@ button:hover {
 }
 
 @keyframes blink {
-    0%, 80%, 100% { opacity: 0; }
-    40% { opacity: 1; }
+    0%, 80%, 100% {
+        opacity: 0;
+    }
+    40% {
+        opacity: 1;
+    }
+}
+/* APP LAYOUT */
+.app {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    background: #020617;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.chat-item {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    background: rgba(255,255,255,0.05);
+}
+
+.chat-item:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.new-chat {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+    color: white;
+    cursor: pointer;
+}
+.chat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-btn {
+    background: transparent;
+    border: none;
+    color: #ff4d4d;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    transform: scale(1.2);
+}
+
+.chat-title {
+    cursor: pointer;
+}
+
+.chat-title:hover {
+    text-decoration: underline;
+}
+.rename-input {
+    width: 100%;
+    padding: 4px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+/* MESSAGE ANIMATION */
+.message {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* HOVER EFFECT (messages) */
+.message:hover {
+    transform: scale(1.02);
+    transition: 0.2s;
+}
+
+/* BUTTON CLICK FEEDBACK */
+button:active {
+    transform: scale(0.95);
+}
+
+/* INPUT FOCUS GLOW */
+input:focus {
+    box-shadow: 0 0 10px rgba(59,130,246,0.6);
+}
+
+/* SIDEBAR ITEM HOVER */
+.chat-item {
+    transition: 0.2s;
+}
+
+.chat-item:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateX(4px);
+}
+
+/* ACTIVE CHAT HIGHLIGHT (optional future use) */
+.chat-item {
+    padding: 12px;
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.05);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+
+    transition: 0.2s;
+}
+
+.chat-item:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateX(4px);
+}
+
+/* HEADER GLOW */
+.chat-header {
+    box-shadow: 0 2px 10px rgba(59,130,246,0.3);
+}
+
+/* SCROLL SMOOTH */
+html {
+    scroll-behavior: smooth;
+}
+input::placeholder {
+    color: rgba(255,255,255,0.4);
 }
