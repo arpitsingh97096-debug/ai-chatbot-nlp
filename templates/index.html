@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot</title>
+
+    <!-- LINK CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">🤖 AI Chatbot</div>
+
+    <div id="chat-box" class="chat-box"></div>
+
+    <div class="input-area">
+        <input id="user-input" placeholder="Type message..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("user-input");
+    let message = input.value.trim();
+
+    if (message === "") return;
+
+    let chatBox = document.getElementById("chat-box");
+
+    // user message
+    chatBox.innerHTML += `<div class="message user">${message}</div>`;
+
+    // 🔥 typing animation
+    let typingId = "typing-" + Date.now();
+    chatBox.innerHTML += `
+        <div id="${typingId}" class="typing">
+            <span>•</span><span>•</span><span>•</span>
+        </div>
+    `;
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    fetch("/chat", {
+        method: "POST",
+        body: JSON.stringify({message: message}),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        // remove typing
+        document.getElementById(typingId).remove();
+
+        // show bot response
+        chatBox.innerHTML += `<div class="message bot">${data.response}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    input.value = "";
+}
+
+// ENTER KEY
+document.getElementById("user-input").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        sendMessage();
+    }
+});
+</script>
+
+</body>
+</html>
