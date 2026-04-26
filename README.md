@@ -38,7 +38,6 @@ ai-chatbot-nlp/
 │
 ├── app.py
 ├── config.py
-├── check_models.py
 ├── intents.json
 ├── utils.py
 ├── .gitignore
