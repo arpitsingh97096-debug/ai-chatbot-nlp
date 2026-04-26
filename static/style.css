@@ -332,3 +332,16 @@ html {
 input::placeholder {
     color: rgba(255,255,255,0.4);
 }
+.chat-item.active {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    box-shadow: 0 0 10px rgba(59,130,246,0.4);
+}
+
+.chat-item {
+    transition: 0.2s;
+}
+
+.chat-item:hover {
+    background: rgba(255,255,255,0.05);
+}
