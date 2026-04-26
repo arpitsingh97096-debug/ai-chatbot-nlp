@@ -27,14 +27,14 @@ A clean AI chatbot built using **Flask (Python)** and **Google Gemini API** with
 ai-chatbot-nlp/
 │
 ├── services/
-│ └── gemini_service.py
+│   └── gemini_service.py
 │
 ├── static/
-│ ├── style.css
-│ └── script.js
+│   ├── style.css
+│   └── script.js
 │
 ├── templates/
-│ └── index.html
+│   └── index.html
 │
 ├── app.py
 ├── config.py
@@ -42,7 +42,7 @@ ai-chatbot-nlp/
 ├── intents.json
 ├── utils.py
 ├── .gitignore
-├── README.md
+└── README.md
 ---
 
 ## ⚙️ Setup Instructions
