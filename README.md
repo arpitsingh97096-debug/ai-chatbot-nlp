@@ -45,34 +45,55 @@ ai-chatbot-nlp/
     └── index.html
 ```
 
-
 ## ⚙️ Setup Instructions
 
-### 1. Clone the repo
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/arpitsingh97096-debug/ai-chatbot-nlp.git
-
 cd ai-chatbot-nlp
+```
+
 ---
 
-### 2. Install dependencies
+### 2. Install Dependencies
+
+```bash
 pip install flask python-dotenv google-generativeai
+```
+
 ---
 
-### 3. Create `.env` file
+### 3. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
 GEMINI_API_KEY=your_api_key_here
+```
+
 ---
 
-### 4. Run the app
+### 4. Run the Application
+
+```bash
 python app.py
-Open in browser: http://127.0.0.1:5000
+```
+
+Then open your browser and go to:
+
+```
+http://127.0.0.1:5000
+```
+
 ---
 
 ## 🔒 Security
 
-- `.env` is ignored using `.gitignore`
-- API key is NOT exposed in code
+* `.env` file is excluded via `.gitignore`
+* API keys are never hardcoded in the source code
+* Sensitive data stays local to your environment
 
----
 
 ## 📸 Preview
 
