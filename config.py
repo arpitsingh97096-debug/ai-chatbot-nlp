@@ -5,3 +5,4 @@ load_dotenv()
 
 API_KEY = os.getenv("GEMINI_API_KEY")
 MODEL_NAME = "models/gemini-2.5-flash"
+print(API_KEY)

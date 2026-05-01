@@ -1,3 +1,7 @@
+// ===============================
+// 🔥 CLEAN + UPGRADED CHAT APP
+// ===============================
+
 let chats = JSON.parse(localStorage.getItem("chats")) || {};
 let currentChatId = localStorage.getItem("currentChatId");
 
@@ -5,13 +9,17 @@ const chatBox = document.getElementById("chat-box");
 const input = document.getElementById("user-input");
 const chatList = document.getElementById("chat-list");
 
-// SAVE TO STORAGE
+// ===============================
+// 💾 SAVE
+// ===============================
 function saveChats() {
     localStorage.setItem("chats", JSON.stringify(chats));
     localStorage.setItem("currentChatId", currentChatId);
 }
 
-// NEW CHAT
+// ===============================
+// 🆕 NEW CHAT
+// ===============================
 function newChat() {
     const id = Date.now().toString();
 
@@ -21,176 +29,183 @@ function newChat() {
     };
 
     currentChatId = id;
-
     saveChats();
-    renderChatList();
-    renderMessages();
+    renderAll();
 }
 
-// AUTO TITLE
+// ===============================
+// 🧠 TITLE GENERATOR
+// ===============================
 function generateTitle(text) {
-    return text.length > 20 ? text.substring(0, 20) + "..." : text;
+    return text.length > 25 ? text.slice(0, 25) + "..." : text;
 }
 
-// SIDEBAR
-Object.keys(chats).forEach(id => {
-    const activeClass = id === currentChatId ? "active" : "";
+// ===============================
+// 📋 RENDER SIDEBAR
+// ===============================
+function renderChatList() {
+    chatList.innerHTML = ""; // FIX: avoid duplication
 
-    chatList.innerHTML += `
-        <div class="chat-item ${activeClass}">
+    Object.keys(chats).forEach(id => {
+        const activeClass = id === currentChatId ? "active" : "";
 
-            <span class="chat-title"
-                  onclick="switchChat('${id}')"
-                  ondblclick="startRename('${id}', this)">
-                ${chats[id].title}
-            </span>
+        const div = document.createElement("div");
+        div.className = `chat-item ${activeClass}`;
 
-            <button onclick="deleteChat('${id}')" class="delete-btn">🗑</button>
+        div.innerHTML = `
+            <span class="chat-title">${chats[id].title}</span>
+            <button class="delete-btn">🗑</button>
+        `;
 
-        </div>
-    `;
-});
+        // EVENTS (better than inline onclick)
+        div.querySelector(".chat-title").onclick = () => switchChat(id);
+        div.querySelector(".chat-title").ondblclick = (e) => startRename(id, e.target);
+        div.querySelector(".delete-btn").onclick = () => deleteChat(id);
 
-// RENAME
+        chatList.appendChild(div);
+    });
+}
+
+// ===============================
+// ✏️ RENAME
+// ===============================
 function startRename(id, element) {
-    let currentText = element.innerText;
+    const currentText = element.innerText;
 
-    element.innerHTML = `
-        <input type="text" class="rename-input" value="${currentText}" />
-    `;
+    element.innerHTML = `<input type="text" value="${currentText}" />`;
 
-    let input = element.querySelector("input");
-    input.focus();
+    const inputField = element.querySelector("input");
+    inputField.focus();
 
-    input.addEventListener("keydown", function(e) {
-        if (e.key === "Enter") {
-            finishRename(id, input.value);
-        }
+    inputField.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") finishRename(id, inputField.value);
     });
 
-    input.addEventListener("blur", function() {
-        finishRename(id, input.value);
-    });
+    inputField.addEventListener("blur", () => finishRename(id, inputField.value));
 }
 
 function finishRename(id, newName) {
-    if (!newName || newName.trim() === "") {
-        renderChatList();
-        return;
-    }
+    if (!newName.trim()) return renderChatList();
 
     chats[id].title = newName.trim();
-
     saveChats();
     renderChatList();
 }
 
-// DELETE
+// ===============================
+// 🗑 DELETE
+// ===============================
 function deleteChat(id) {
     delete chats[id];
 
     if (currentChatId === id) {
-        let keys = Object.keys(chats);
+        const keys = Object.keys(chats);
         currentChatId = keys.length ? keys[0] : null;
     }
 
     saveChats();
-    renderChatList();
-    renderMessages();
+    renderAll();
 }
 
-// SWITCH CHAT
+// ===============================
+// 🔁 SWITCH CHAT
+// ===============================
 function switchChat(id) {
     currentChatId = id;
     saveChats();
-
-    renderChatList();   // 
-    renderMessages();
+    renderAll();
 }
 
-// SHOW MESSAGES
+// ===============================
+// 💬 RENDER MESSAGES
+// ===============================
 function renderMessages() {
     chatBox.innerHTML = "";
-
     if (!currentChatId) return;
 
     chats[currentChatId].messages.forEach(msg => {
-        chatBox.innerHTML += `
-            <div class="message ${msg.role}">
-                ${msg.text}
-            </div>
-        `;
+        const div = document.createElement("div");
+        div.className = `message ${msg.role}`;
+        div.textContent = msg.text; // FIX: prevent XSS
+        chatBox.appendChild(div);
     });
 
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// SEND MESSAGE (FIXED)
-function sendMessage() {
-    let message = input.value.trim();
-    if (message === "") return;
+// ===============================
+// 🚀 SEND MESSAGE
+// ===============================
+async function sendMessage() {
+    const message = input.value.trim();
+    if (!message) return;
 
     if (!currentChatId) newChat();
 
-    // AUTO TITLE (first message)
     if (chats[currentChatId].messages.length === 0) {
         chats[currentChatId].title = generateTitle(message);
     }
 
-    // SAVE USER MESSAGE
-    chats[currentChatId].messages.push({
-        role: "user",
-        text: message
-    });
+    chats[currentChatId].messages.push({ role: "user", text: message });
 
+    input.value = "";
     renderMessages();
     saveChats();
 
-    input.value = "";
-
-    // TYPING
     const typing = document.createElement("div");
     typing.className = "typing";
-    typing.innerHTML = `<span>•</span><span>•</span><span>•</span>`;
+    typing.innerHTML = "<span>•</span><span>•</span><span>•</span>";
     chatBox.appendChild(typing);
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+    try {
+        const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message })
+        });
 
-    // API CALL
-    fetch("/chat", {
-        method: "POST",
-        body: JSON.stringify({ message: message }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(res => res.json())
-    .then(data => {
-        typing.remove();
+        const data = await res.json();
 
-        // SAVE BOT MESSAGE
         chats[currentChatId].messages.push({
             role: "bot",
             text: data.response
         });
 
-        renderMessages();
-        saveChats();
-    });
+    } catch (err) {
+        chats[currentChatId].messages.push({
+            role: "bot",
+            text: "⚠️ Error: Server not responding"
+        });
+    }
+
+    typing.remove();
+    renderMessages();
+    saveChats();
 }
 
-// ENTER KEY
-input.addEventListener("keydown", function(e) {
+// ===============================
+// ⌨️ ENTER KEY
+// ===============================
+input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         e.preventDefault();
         sendMessage();
     }
 });
 
-// INIT
+// ===============================
+// 🔄 RENDER ALL
+// ===============================
+function renderAll() {
+    renderChatList();
+    renderMessages();
+}
+
+// ===============================
+// 🟢 INIT
+// ===============================
 if (!currentChatId || !chats[currentChatId]) {
     newChat();
 } else {
-    renderChatList();
-    renderMessages();
+    renderAll();
 }
