@@ -3,7 +3,10 @@
 <head>
     <title>Arpit ChatBot</title>
 
-    <!-- LINK CSS -->
+    <!-- FONT (important for modern UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -13,25 +16,54 @@
 
     <!-- SIDEBAR -->
     <div class="sidebar">
-        <div class="sidebar-header">💬 Chats</div>
-        <div id="chat-list" class="chat-list"></div>
-        <button onclick="newChat()" class="new-chat">+ New Chat</button>
+
+    <!-- TOP BAR -->
+    <div class="sidebar-top">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <span class="logo">⚡</span>
     </div>
+
+    <!-- SEARCH -->
+    <div class="search-box">
+        <input id="search-chat" placeholder="Search chats..." />
+    </div>
+
+    <!-- NEW CHAT -->
+    <button onclick="newChat()" class="new-chat">+ New Chat</button>
+
+    <!-- CHAT LIST -->
+    <div id="chat-list" class="chat-list"></div>
+
+    <!-- BOTTOM -->
+    <div class="sidebar-bottom">
+        <button onclick="toggleTheme()">🌗 Theme</button>
+    </div>
+
+</div>
 
     <!-- MAIN CHAT -->
     <div class="chat-container">
+
         <div class="chat-header">Arpit ChatBot</div>
 
         <div id="chat-box" class="chat-box"></div>
 
+        <!-- INPUT AREA (UPGRADED) -->
         <div class="input-area">
-            <input id="user-input" placeholder="Type message..." />
+
+            <!-- VOICE BUTTON -->
+            <button class="icon-btn voice-btn">🎤</button>
+
+            <input id="user-input" placeholder="Ask anything..." />
+
             <button onclick="sendMessage()">➤</button>
+
         </div>
     </div>
 
 </div>
 
 <script src="{{ url_for('static', filename='script.js') }}"></script>
+
 </body>
 </html>

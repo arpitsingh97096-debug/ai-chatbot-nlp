@@ -310,4 +310,270 @@ button:active {
     40% {
         opacity: 1;
     }
+}/* ============================= */
+/* 🚀 LEVEL 2 ENHANCEMENTS */
+/* ============================= */
+
+/* FLOATING INPUT */
+.input-area {
+    position: sticky;
+    bottom: 10px;
+
+    margin: 10px;
+    border-radius: 16px;
+
+    background: rgba(17,24,39,0.9);
+    backdrop-filter: blur(12px);
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* INPUT IMPROVED */
+input {
+    font-size: 14px;
+}
+
+/* MESSAGE HOVER ACTION */
+.message {
+    position: relative;
+    transition: 0.2s ease;
+}
+
+.message:hover {
+    transform: translateY(-2px);
+}
+
+/* MESSAGE ACTION (like copy/edit future ready) */
+.message::after {
+    content: "⋯";
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    font-size: 14px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+.message:hover::after {
+    opacity: 0.5;
+}
+
+/* AI GLOW (subtle, not cringe) */
+.bot {
+    position: relative;
+}
+
+.bot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    box-shadow: 0 0 20px rgba(99,102,241,0.15);
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.bot:hover::before {
+    opacity: 1;
+}
+
+/* STAGGER ANIMATION */
+.message {
+    animation: popIn 0.25s ease;
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* SIDEBAR POLISH */
+.sidebar {
+    transition: 0.3s;
+}
+
+.sidebar:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+/* ACTIVE CHAT SMOOTH */
+.chat-item.active {
+    transform: scale(1.02);
+}
+
+/* BUTTON PREMIUM FEEL */
+button {
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+button:hover {
+    filter: brightness(1.1);
+}
+
+/* SCROLL SMOOTH */
+.chat-box {
+    scroll-behavior: smooth;
+}
+
+/* INPUT FOCUS PREMIUM */
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99,102,241,0.4);
+}
+
+/* SOFT FADE TOP SHADOW (depth illusion) */
+.chat-box::before {
+    content: "";
+    position: sticky;
+    top: 0;
+    height: 20px;
+    display: block;
+
+    background: linear-gradient(to bottom, rgba(11,15,25,1), transparent);
+    z-index: 1;
+}
+
+/* SOFT FADE BOTTOM */
+.chat-box::after {
+    content: "";
+    position: sticky;
+    bottom: 0;
+    height: 20px;
+    display: block;
+
+    background: linear-gradient(to top, rgba(11,15,25,1), transparent);
+}
+
+/* MESSAGE GROUP SPACING */
+.message + .message {
+    margin-top: 4px;
+}/* ============================= */
+/* 🧠 LEVEL 3 UI */
+/* ============================= */
+
+/* FLOATING ACTION BAR (input upgraded) */
+.input-area {
+    align-items: center;
+}
+
+/* ICON BUTTONS */
+.icon-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.05);
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.icon-btn:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* VOICE BUTTON SPECIAL */
+.voice-btn {
+    color: #22d3ee;
+}
+
+/* COPY BUTTON */
+.copy-btn {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
+    font-size: 12px;
+    opacity: 0;
+    cursor: pointer;
+    color: #94a3b8;
+}
+
+.message:hover .copy-btn {
+    opacity: 1;
+}
+
+/* STREAMING TEXT EFFECT */
+.streaming {
+    display: inline-block;
+    white-space: pre-wrap;
+    animation: typing 1.5s steps(40, end);
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* MARKDOWN STYLE */
+.message strong {
+    font-weight: 600;
+    color: #fff;
+}
+
+.message code {
+    background: #020617;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #22d3ee;
+}
+
+/* SIDEBAR COLLAPSE */
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar.collapsed .chat-title {
+    display: none;
+}
+
+/* TOGGLE BUTTON */
+.toggle-btn {
+    margin-bottom: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+}
+
+/* LIGHT MODE */
+body.light {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface-soft: #f1f5f9;
+
+    --text: #0f172a;
+    --text-dim: #64748b;
+
+    --border: rgba(0,0,0,0.08);
+}
+
+body.light .chat-container {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* MESSAGE TIMESTAMP */
+.timestamp {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 4px;
+}
+
+/* MESSAGE GROUPING */
+.bot + .bot {
+    margin-top: -6px;
+}
+
+.user + .user {
+    margin-top: -6px;
+}.chat-item {
+    cursor: pointer;
 }
