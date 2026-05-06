@@ -19,7 +19,7 @@ This project focuses on **building systems, not just features**.
 
 > Add your deployed link here (Render / Railway / Vercel)
 
-https://your-live-demo-link.com
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Click%20Here-0FF7E8?style=for-the-badge&logo=vercel)](https://your-live-demo-link.com)
 
 ---
 
@@ -28,6 +28,14 @@ https://your-live-demo-link.com
 <p align="center">
   <img src="https://skillicons.dev/icons?i=python,flask,js,html,css,git,github" />
 </p>
+
+| Layer | Technology |
+|-------|-----------|
+| Backend | Python, Flask |
+| AI Model | Google Gemini API |
+| Frontend | HTML, CSS, JavaScript |
+| Config | python-dotenv |
+| Version Control | Git, GitHub |
 
 ---
 
@@ -64,42 +72,42 @@ ai-chatbot-nlp/
 
 ## Setup & Installation
 
-### Clone Repository
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/arpitsingh97096-debug/ai-chatbot-nlp.git
 cd ai-chatbot-nlp
 ```
 
-### Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install flask python-dotenv google-generativeai
 ```
 
-### Environment Variables
+### 3. Environment Variables
 
-Create a `.env` file:
+Create a `.env` file in the root directory:
 
 ```env
 GEMINI_API_KEY=your_api_key_here
 ```
 
-### Run Locally
+### 4. Run Locally
 
 ```bash
 python app.py
 ```
 
-Open: http://127.0.0.1:5000
+Open: [http://127.0.0.1:5000](http://127.0.0.1:5000)
 
 ---
 
 ## Security
 
-- ✅ Environment-based API key management
-- ✅ `.env` excluded via `.gitignore`
-- ✅ No sensitive data exposed
+- Environment-based API key management
+- `.env` excluded via `.gitignore`
+- No sensitive data exposed in source code
 
 ---
 
@@ -107,16 +115,18 @@ Open: http://127.0.0.1:5000
 
 You can deploy this project using:
 
-- ✅ Render
-- ✅ Railway
-- ✅ Vercel (frontend + API proxy)
+| Platform | Type |
+|----------|------|
+| Render | Full-stack hosting |
+| Railway | Backend + DB hosting |
+| Vercel | Frontend + API proxy |
 
 ### Basic Deployment Flow
 
-1. ✅ Push project to GitHub
-2. ✅ Connect repo to deployment platform
-3. ✅ Add environment variables
-4. ✅ Deploy
+1. Push project to GitHub
+2. Connect repo to deployment platform
+3. Add environment variables
+4. Deploy
 
 ---
 
@@ -147,11 +157,11 @@ You can deploy this project using:
 
 ## Future Improvements
 
-- 🔐 Authentication system (JWT / OAuth)
-- 🗄️ Database integration (MongoDB / PostgreSQL)
-- ⚡ Streaming responses (real-time token output)
-- 🤖 Multi-model AI support
-- 🐳 Docker + CI/CD pipeline
+- Authentication system (JWT / OAuth)
+- Database integration (MongoDB / PostgreSQL)
+- Streaming responses (real-time token output)
+- Multi-model AI support
+- Docker + CI/CD pipeline
 
 ---
 
@@ -160,4 +170,14 @@ You can deploy this project using:
 <p align="center">
   <b>Arpit Singh</b><br>
   AI • Systems • Backend Development
+  <br><br>
+  <a href="https://github.com/arpitsingh97096-debug">
+    <img src="https://img.shields.io/badge/GitHub-arpitsingh97096--debug-181717?style=for-the-badge&logo=github"/>
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <i>Star this repo if you found it useful.</i>
 </p>
